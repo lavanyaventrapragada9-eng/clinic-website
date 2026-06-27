@@ -5,20 +5,23 @@ import pandas as pd
 # ================= MYSQL CONNECTION =================
 def get_connection():
     return mysql.connector.connect(
-        host=st.secrets["DB_HOST"],
-        port=int(st.secrets["DB_PORT"]),
-        user=st.secrets["DB_USER"],
-        password=st.secrets["DB_PASSWORD"],
-        database=st.secrets["DB_NAME"]
+        host="localhost",
+        user="root",
+        password="l@vanya123",
+        database="clinic_db"
     )
-# ================= PAGE SETTINGS =================
+# ================= PAGE CONFIG =================
 st.set_page_config(
     page_title="Sri Sankara Vision Care",
     page_icon="👁️",
     layout="wide"
 )
+
+# ================= HEADER =================
 st.title("👁️ Sri Sankara Vision Care")
 st.subheader("Complete Eye Care Solutions")
+
+
 
 st.success("🌟 Welcome to Sri Sankara Vision Care")
 
@@ -72,7 +75,27 @@ with col2:
 
 with col3:
     st.success("😊 Affordable & Quality Care")
-    
+
+st.header("📈 Our Achievements")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric("Patients Treated", "10,000+")
+
+with col2:
+    st.metric("Years of Experience", "7")
+
+with col3:
+    st.metric("Success Rate", "99%")
+
+st.header("💬 Patient Reviews")
+
+st.info("⭐⭐⭐⭐⭐ Excellent treatment and friendly staff.")
+
+st.info("⭐⭐⭐⭐⭐ Best eye clinic in Challapalli.")
+
+st.info("⭐⭐⭐⭐⭐ Highly recommended for eye checkups.")
 # ================= SERVICES =================
 st.header("🩺 Services")
 st.write("""
