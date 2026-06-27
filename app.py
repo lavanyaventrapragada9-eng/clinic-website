@@ -51,8 +51,28 @@ with col1:
 
 with col2:
     st.subheader("🕒 Timings")
-    st.write("9:00 AM - 11:30 PM")
+    st.write("9:00 AM - 11:30 PM") 
 
+st.header("📍 Our Location")
+
+st.components.v1.iframe(
+    "https://www.google.com/maps?q=Sri+Surya+Complex+Shabul+Bazar+Bandar+Road+Challapalli&output=embed",
+    width=700,
+    height=450
+)
+st.header("⭐ Why Choose Sri Sankara Vision Care?")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.success("👨‍⚕️ Experienced Ophthalmologist")
+
+with col2:
+    st.success("🔬 Modern Eye Equipment")
+
+with col3:
+    st.success("😊 Affordable & Quality Care")
+    
 # ================= SERVICES =================
 st.header("🩺 Services")
 st.write("""
