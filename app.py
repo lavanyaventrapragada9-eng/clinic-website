@@ -5,12 +5,12 @@ import pandas as pd
 # ================= MYSQL CONNECTION =================
 def get_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="l@vanya123",
-        database="clinic_db"
+        host=st.secrets["DB_HOST"],
+        port=int(st.secrets["DB_PORT"]),
+        user=st.secrets["DB_USER"],
+        password=st.secrets["DB_PASSWORD"],
+        database=st.secrets["DB_NAME"]
     )
-
 # ================= PAGE SETTINGS =================
 st.set_page_config(
     page_title="Sri Sankara Vision Care",
