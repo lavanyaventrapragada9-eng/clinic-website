@@ -17,10 +17,25 @@ st.set_page_config(
     page_icon="👁️",
     layout="wide"
 )
+col1, col2 = st.columns([1,4])
 
-# ================= HEADER =================
-st.title("👁️ Sri Sankara Vision Care")
-st.subheader("Complete Eye Care Solutions")
+with col1:
+    st.image("logo.png", width=150)
+with col2:
+ st.title("👁️ Sri Sankara Vision Care")
+ st.subheader("Complete Eye Care Solutions")
+ st.success("🌟 Welcome to Sri Sankara Vision Care")
+
+ st.write("""
+We provide complete eye care with modern equipment,
+experienced doctors and affordable treatment.
+
+✔ Eye Checkup
+✔ Cataract Screening
+✔ Vision Testing
+✔ Diabetic Eye Care
+✔ Emergency Eye Care
+""")
 
 st.markdown("---")
 
@@ -30,8 +45,18 @@ st.write("Advanced eye care with modern diagnosis and treatment.")
 
 # ================= DOCTOR =================
 st.header("👨‍⚕️ Doctor Profile")
-st.write("Dr. Y. Veera")
-st.write("Ophthalmologist")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("👨‍⚕️ Doctor")
+    st.write("Dr. Y. Veera")
+    st.write("Opthalmologist")
+
+
+with col2:
+    st.subheader("🕒 Timings")
+    st.write("9:00 AM - 11:30 PM")
 
 # ================= SERVICES =================
 st.header("🩺 Services")
@@ -55,6 +80,17 @@ st.write("📱 7793927222")
 st.write("📧 srisankaravisioncare@gmail.com")
 
 st.markdown("---")
+st.markdown(
+"""
+### Sri Sankara Vision Care
+
+📍 Sri Surya Complex, Shabul Bazar, Bandar Road, Challapalli
+
+📞 7793927222
+
+📧 srisankaravisioncare@gmail.com
+"""
+)
 
 # ================= ADMIN LOGIN =================
 st.sidebar.title("🔐 Admin Login")
@@ -80,7 +116,8 @@ problem = st.text_area("Eye Problem")
 
 if st.button("Book Appointment"):
 
-    if name and phone and problem:
+    if not name or not phone or not problem:
+        st.warning("Please fill all fields")
 
         conn = get_connection()
         cursor = conn.cursor()
@@ -97,12 +134,13 @@ if st.button("Book Appointment"):
         """, (appointment_id, name, phone, age, date, problem))
 
         conn.commit()
+        cursor.close()
         conn.close()
 
         st.success(f"Appointment Booked! ID: {appointment_id}")
 
-    else:
-        st.warning("Please fill all fields")
+    
+        
 
 # ================= ADMIN DASHBOARD =================
 if admin_logged_in:
@@ -172,11 +210,18 @@ if admin_logged_in:
 
             conn.commit()
             conn.close()
+        if cursor.rowcount > 0:
 
             st.success("Deleted successfully")
+        else:
+            st.warning("Appointment ID not found")
+        cursor.close()
+        conn.close()
 
         # ================= UPDATE =================
         st.subheader("✏️ Update Appointment")
+
+        update_id = st.text_input("Appointment ID to Update")
 
         
         new_phone = st.text_input("New Phone")
@@ -185,17 +230,20 @@ if admin_logged_in:
         if st.button("Update"):
             conn = get_connection()
             cursor = conn.cursor()
-
+            
             cursor.execute("""
                 UPDATE appointments
                 SET phone=%s, problem=%s
                 WHERE appointment_id=%s
-            """, (new_phone, new_problem))
+            """, (new_phone, new_problem , update_id))
 
             conn.commit()
             conn.close()
+        if cursor.rowcount > 0:
 
             st.success("Updated successfully")
+        else:
+            st.warning("Appointment ID not found")
 
         # ================= DOWNLOAD =================
         st.subheader("📥 Download Appointments")
