@@ -17,16 +17,12 @@ st.set_page_config(
     page_icon="👁️",
     layout="wide"
 )
-col1, col2 = st.columns([1,4])
+st.title("👁️ Sri Sankara Vision Care")
+st.subheader("Complete Eye Care Solutions")
 
-with col1:
-    st.image("logo.png", width=150)
-with col2:
- st.title("👁️ Sri Sankara Vision Care")
- st.subheader("Complete Eye Care Solutions")
- st.success("🌟 Welcome to Sri Sankara Vision Care")
+st.success("🌟 Welcome to Sri Sankara Vision Care")
 
- st.write("""
+st.write("""
 We provide complete eye care with modern equipment,
 experienced doctors and affordable treatment.
 
@@ -36,7 +32,6 @@ experienced doctors and affordable treatment.
 ✔ Diabetic Eye Care
 ✔ Emergency Eye Care
 """)
-
 st.markdown("---")
 
 # ================= ABOUT =================
